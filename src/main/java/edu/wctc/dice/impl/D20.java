@@ -1,5 +1,6 @@
-package edu.wctc.dice;
+package edu.wctc.dice.impl;
 
+import edu.wctc.dice.Player;
 import edu.wctc.dice.iface.DieRoller;
 import edu.wctc.dice.iface.GameInput;
 import edu.wctc.dice.iface.GameOutput;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class DiceGame implements DieRoller {
+public class D20 implements DieRoller {
     private GameInput in;
     private GameOutput out;
 
@@ -21,7 +22,7 @@ public class DiceGame implements DieRoller {
 
 
     @Autowired
-    public DiceGame(GameInput in, GameOutput out) {
+    public D20(GameInput in, GameOutput out) {
         this.in = in;
         this.out = out;
         System.out.println("DiceGame created");
@@ -117,11 +118,18 @@ public class DiceGame implements DieRoller {
     private boolean rollDice() {
         int die1 = rollDie();
         int die2 = rollDie();
+        String outcome = "";
 
         // Players win on even totals
         boolean even = (die1 + die2) % 2 == 0;
 
-        String outcome = "Roll was " + die1 + ", " + die2;
+        if (die1 == 1 && die2 == 1){
+            outcome = "Nat 1!? Oof.. good thing this isn't D&D...";
+        } else if (die1 == 20 && die2 == 20){
+            outcome = "NAT 20's!!! SLAY THAT DRAGON!... oh wait... this still isn't D&D";
+        } else {
+            outcome = "Roll was " + die1 + ", " + die2;
+        }
 
         out.output(outcome + (even ? "\nPlayers WIN!" : "\nPlayers LOSE!"));
 
@@ -132,7 +140,8 @@ public class DiceGame implements DieRoller {
 
     public int rollDie() {
         Random random = new Random();
-        return random.nextInt(6) + 1;
+        return random.nextInt(20) + 1;
 //        return dieRoller.rollDie();
     }
 }
+

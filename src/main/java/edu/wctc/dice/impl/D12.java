@@ -1,5 +1,6 @@
-package edu.wctc.dice;
+package edu.wctc.dice.impl;
 
+import edu.wctc.dice.Player;
 import edu.wctc.dice.iface.DieRoller;
 import edu.wctc.dice.iface.GameInput;
 import edu.wctc.dice.iface.GameOutput;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class DiceGame implements DieRoller {
+public class D12 implements DieRoller {
     private GameInput in;
     private GameOutput out;
 
@@ -21,7 +22,7 @@ public class DiceGame implements DieRoller {
 
 
     @Autowired
-    public DiceGame(GameInput in, GameOutput out) {
+    public D12(GameInput in, GameOutput out) {
         this.in = in;
         this.out = out;
         System.out.println("DiceGame created");
@@ -132,7 +133,8 @@ public class DiceGame implements DieRoller {
 
     public int rollDie() {
         Random random = new Random();
-        return random.nextInt(6) + 1;
+        return random.nextInt(12) + 1;
 //        return dieRoller.rollDie();
     }
 }
+

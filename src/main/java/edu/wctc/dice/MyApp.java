@@ -1,5 +1,6 @@
 package edu.wctc.dice;
 
+import edu.wctc.dice.iface.DieRoller;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MyApp {
@@ -8,6 +9,8 @@ public class MyApp {
         context.register(AppConfig.class);
         context.refresh();
 
-        ((DiceGame)context.getBean("diceGame")).play();
+        ((DieRoller)context.getBean("rollDie")).play();
+
+        context.close();
     }
 }
