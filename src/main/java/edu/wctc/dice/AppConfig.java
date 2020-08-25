@@ -31,5 +31,7 @@ public class AppConfig {
         //return new D10(gameInput(), gameOutput());
         //return new D12(gameInput(), gameOutput());
         return new D20(gameInput(), gameOutput());
+
+
     }
 }
